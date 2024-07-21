@@ -1,5 +1,4 @@
 # Introduction
-
 In quantitative metallographic image analysis, accurately identifying grain boundaries within texture-oriented images poses significant challenges due to the intricate nature of texture boundary edges. Traditional methods, starting from simple image processing techniques to deep learning-based approaches like semantic segmentation using sliding windows, often fail to sustain effectiveness, especially when dealing with texture boundaries. Texture perception is subjective, context-sensitive, and difficult even for humans to define. On the other end, generalized models like the Segment Anything Model (SAM) struggle with purely texture-based images and often fail at accurate segmentation without clear object boundaries.
 
 In this research, we introduce a novel approach that flips the conventional methodology by employing partial labels while maintaining the complete context of the images. This strategy enhances the model’s ability to discern grain boundaries more effectively. Our method, namely MLOgraphy++, utilizes a U-Net architecture trained with partial labels to segment metallographic images, prioritizing continuous boundary detection over complete grain contours.
@@ -8,7 +7,9 @@ We embrace the Heyn intercept method, a classical technique for measuring averag
 
 We compare our approach against the previous state-of-the-art method MLOgraphy, which used complete labels with partial context, on the Texture Boundary in Metallography comprehensive dataset (TBM dataset). Our results show a significant improvement in segmentation accuracy and reliability, with quantitative analysis against ground truth annotations confirming the robustness and effectiveness of our approach.
 
-
+# Evaluation
+In this GitHub repository, we provide the evaluation code to reproduce our results. We convert GT annotations and models' predictions into 256x256 pixel images by combining 4 adjacent 128x128 labels for statistical analysis, averaging 10 times per image. We perform analysis both with and without overlapping sections with GT used during training to ensure comprehensive evaluation. We use Guo-Hall thinning and the Heyn intercept method to extract statistical results, including variance and mean of grain sizes, comparing MLOgraphy and MLOGRAPHY++.
+   
 # Instructions
 
 ## Installation Requirements
@@ -17,20 +18,7 @@ We compare our approach against the previous state-of-the-art method MLOgraphy, 
   pip install pandas numpy opencv-python pillow argparse
   ```
 
-### Key Steps
-
-1. **Process human-tagged GT images into 256x256 squares** and analyze them using the Hyen intercept method.
-2. **Compare predictions from Mlography and Clemex models**, excluding overlapping sections with the GT used during training.
-3. **Create 256x256 squares for consistency** and perform meta-statistical analysis to extract mean, median, and variance for each group.
-
-### Key Findings
-
-- **Mean and Median**: Both models show similar mean and median grain sizes compared to the GT.
-- **Variance**: Melography exhibits higher variance in grain sizes, while Clemex predictions are closer to GT.
-- **Statistical Comparison**: Melography's variance is 25% away from the GT, while Clemex is 16% away, indicating a 9% advantage for Clemex.
-
-
-**Evaluation**
+**Scripts**
 There are several scripts:
   - `grain_size.py`: Functions for calculating grain size.
   - `results.py`: Meta-statistical analysis and results presentation.
@@ -45,22 +33,24 @@ There are several scripts:
    git clone https://github.com/Inbalc2/GetGrainSize.git
 
 2. **Crop the GT images**:
-   Run the script `crop_images_gt.py` in the following way:
+   Run the script `crop_images_gt.py`  to crop the ground truth images into 256x256 squares:
    ```python
-    python crop_images_gt.py --clemex_path <PATH_TO_CLEMEX_PREDICTIONS> --zones_path <PATH_TO_ZONES> --output_path <PATH_TO_OUTPUT_DIRECTORY> --mlography_path     
-    <PATH_TO_MLOGRAPHY_PREDICTIONS> --gt_path <PATH_TO_GROUND_TRUTH_IMAGES>
+   python crop_images_gt.py --MLOGRAPHY++_path <PATH_TO_MLOGRAPHY++_PREDICTIONS> --zones_path <PATH_TO_ZONES> --output_path <PATH_TO_OUTPUT_DIRECTORY> --    
+   mlography_path <PATH_TO_MLOGRAPHY_PREDICTIONS> --gt_path <PATH_TO_GROUND_TRUTH_IMAGES>
    ```
-3. **Process Non-overlapping Crops**:
-   Run the script crop_non_overlapping_crops.py to crop non-overlapping sections into 256x256 squares:
+3. **Generate Non-overlapping Crops of Model Predictions:**:
+   Run the script crop_non_overlapping_crops.py to crop non-overlapping sections of model predictions into 256x256 squares, ensuring they do not overlap with GT:
    ```python
-   python non_overlapping_crops.py --image_dir <PATH TO IMAGE DIRECTORY> --output_dir <PATH TO OUTPUT DIRECTORY> --zone_size <WIDTH> <HEIGHT> --gt_image_dir <PATH TO GROUND TRUTH 
+   python crop_non_overlapping_crops.py --image_dir <PATH_TO_IMAGE_DIRECTORY> --output_dir <PATH_TO_OUTPUT_DIRECTORY> --zone_size <WIDTH> <HEIGHT> --    
+   gt_image_dir <PATH_TO_GROUND_TRUTH_IMAGE_DIRECTORY>
    IMAGE DIRECTORY>
    ```
-4.  **Calculate Grain Size**:
-    Run the script grain_size.py to calculate grain size:
+4.  **Calculate Grain Size Using the Heyn Intercept Method:**:
+    Run the script grain_size.py for Heyn intercept method evaluation:
     ```python
-    python grain_size.py --gt_crops_path <PATH TO GT CROPS> --mlography_crops_path <PATH TO MLOGRAPHY CROPS> --clemex_crops_path <PATH TO CLEMEX CROPS> -- 
-    output_dir <PATH TO OUTPUT DIRECTORY>
+    python grain_size.py --gt_crops_path <PATH_TO_GT_CROPS> --mlography_crops_path <PATH_TO_MLOGRAPHY_CROPS> --MLOGRAPHY++_crops_path 
+    <PATH_TO_MLOGRAPHY++_CROPS> --output_dir <PATH_TO_OUTPUT_DIRECTORY>
+
     ```
 5.  **Analyze Results**:
     Run the script results.py to perform meta-statistical analysis and present the results:
