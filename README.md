@@ -8,6 +8,7 @@ We embrace the Heyn intercept method, a classical technique for measuring averag
 
 We compare our approach against the previous state-of-the-art method MLOgraphy, which used complete labels with partial context, on the Texture Boundary in Metallography comprehensive dataset (TBM dataset). Our results show a significant improvement in segmentation accuracy and reliability, with quantitative analysis against ground truth annotations confirming the robustness and effectiveness of our approach.
 
+
 # Instructions
 
 ## Installation Requirements
@@ -18,16 +19,24 @@ We compare our approach against the previous state-of-the-art method MLOgraphy, 
 
 ### Key Steps
 
+1. **Process human-tagged GT images into 256x256 squares** and analyze them using the Hyen intercept method.
+2. **Compare predictions from Mlography and Clemex models**, excluding overlapping sections with the GT used during training.
+3. **Create 256x256 squares for consistency** and perform meta-statistical analysis to extract mean, median, and variance for each group.
 
 ### Key Findings
 
-## Project Structure
+- **Mean and Median**: Both models show similar mean and median grain sizes compared to the GT.
+- **Variance**: Melography exhibits higher variance in grain sizes, while Clemex predictions are closer to GT.
+- **Statistical Comparison**: Melography's variance is 25% away from the GT, while Clemex is 16% away, indicating a 9% advantage for Clemex.
 
-**Scripts**:
-  - `grain_size.py`: Functions for calculating grain size from metallographic images.
+
+**Evaluation**
+There are several scripts:
+  - `grain_size.py`: Functions for calculating grain size.
   - `results.py`: Meta-statistical analysis and results presentation.
   - `crop_images_gt.py`: Functions for cropping images into 256x256 with GT consideration.
   - `crop_non_overlapping_crops.py`:  Functions for cropping non-overlapping sections with GT into 256x256 squares.
+
 
 ## Usage Instructions
 
@@ -58,7 +67,6 @@ We compare our approach against the previous state-of-the-art method MLOgraphy, 
     ```python
     python results.py --df_path <PATH TO CSV FILE CONTAINING RESULTS>
     ```
-
 
 
 ## Expected Output
