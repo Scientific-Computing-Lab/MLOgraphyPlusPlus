@@ -10,7 +10,7 @@ Analysis of metallography images comparing Melography and Clemex predictions to 
 
 This project involves processing and analyzing metallography images, comparing predictions from Melography and Clemex models to Ground Truth (GT).
 ### Key Steps
-
+sdgfdfg
 1. **Process human-tagged GT images into 256x256 squares** and analyze them using the Heyn intercept method.
 2. **Compare predictions from Melography and Clemex models**, excluding overlapping sections with the GT used during training.
 3. **Create 256x256 squares for consistency** and perform meta-statistical analysis to extract mean, median, and variance for each group.
