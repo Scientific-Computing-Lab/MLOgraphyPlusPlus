@@ -1,6 +1,12 @@
-# MLOgraphy++
+# Introduction
 
-Analysis of metallography images comparing Melography and Clemex predictions to Ground Truth.
+In quantitative metallographic image analysis, accurately identifying grain boundaries within texture-oriented images poses significant challenges due to the intricate nature of texture boundary edges. Traditional methods, starting from simple image processing techniques to deep learning-based approaches like semantic segmentation using sliding windows, often fail to sustain effectiveness, especially when dealing with texture boundaries. Texture perception is subjective, context-sensitive, and difficult even for humans to define. On the other end, generalized models like the Segment Anything Model (SAM) struggle with purely texture-based images and often fail at accurate segmentation without clear object boundaries.
+
+In this research, we introduce a novel approach that flips the conventional methodology by employing partial labels while maintaining the complete context of the images. This strategy enhances the model’s ability to discern grain boundaries more effectively. Our method, namely MLOgraphy++, utilizes a U-Net architecture trained with partial labels to segment metallographic images, prioritizing continuous boundary detection over complete grain contours.
+
+We embrace the Heyn intercept method, a classical technique for measuring average grain size, as a valid alternative to the pixel-accuracy common evaluation metric. This is because the distribution of grain sizes is more critical than exact pixel prediction, which is inherently challenging to label accurately. Our method demonstrates the suitability of the Heyn intercept method as an evaluation metric.
+
+We compare our approach against the previous state-of-the-art method MLOgraphy, which used complete labels with partial context, on the Texture Boundary in Metallography comprehensive dataset (TBM dataset). Our results show a significant improvement in segmentation accuracy and reliability, with quantitative analysis against ground truth annotations confirming the robustness and effectiveness of our approach.
 
 ## Overview
 
