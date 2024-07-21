@@ -8,35 +8,27 @@ We embrace the Heyn intercept method, a classical technique for measuring averag
 
 We compare our approach against the previous state-of-the-art method MLOgraphy, which used complete labels with partial context, on the Texture Boundary in Metallography comprehensive dataset (TBM dataset). Our results show a significant improvement in segmentation accuracy and reliability, with quantitative analysis against ground truth annotations confirming the robustness and effectiveness of our approach.
 
-## Overview
+# Instructions
 
-<div align="center">
-  <img src="MLOgraphy++/Datasets/MLOgraphy/image/10-0-768-0-0.png" alt="Sample Image">
-</div>
+## Installation Requirements
+  Ensure you have the following dependencies installed:
+  ```sh
+  pip install pandas numpy opencv-python pillow argparse
+  ```
 
-This project involves processing and analyzing metallography images, comparing predictions from Melography and Clemex models to Ground Truth (GT).
 ### Key Steps
-sdgfdfg
-1. **Process human-tagged GT images into 256x256 squares** and analyze them using the Heyn intercept method.
-2. **Compare predictions from Melography and Clemex models**, excluding overlapping sections with the GT used during training.
-3. **Create 256x256 squares for consistency** and perform meta-statistical analysis to extract mean, median, and variance for each group.
+
 
 ### Key Findings
 
-- **Mean and Median**: Both models show similar mean and median grain sizes compared to the GT.
-- **Variance**: Melography exhibits higher variance in grain sizes, while Clemex predictions are closer to GT.
-- **Statistical Comparison**: Melography's variance is 25% away from the GT, while Clemex is 16% away, indicating a 9% advantage for Clemex.
-
 ## Project Structure
 
-- **Scripts**:
-  - `grain_size.py`: Functions for calculating grain size.
+**Scripts**:
+  - `grain_size.py`: Functions for calculating grain size from metallographic images.
   - `results.py`: Meta-statistical analysis and results presentation.
-  - `crop_images_with_gt.py`: Functions for cropping images with GT consideration.
-  - `crop_non_overlapping_crops.py`: Functions for cropping non-overlapping sections.
-- **Data Directories**:
-  - `data/`: Input images.
-  - `results/`: Processed images and statistical results.
+  - `crop_images_gt.py`: Functions for cropping images into 256x256 with GT consideration.
+  - `crop_non_overlapping_crops.py`:  Functions for cropping non-overlapping sections with GT into 256x256 squares.
+
 ## Usage Instructions
 
 1. **Clone the Repository**:
@@ -46,6 +38,32 @@ sdgfdfg
 2. **Crop the GT images**:
    Run the script `crop_images_gt.py` in the following way:
    ```python
-    python crop_images_gt.py --clemex_path <PATH TO CLEMEX PREDICITON> --zones_path <PATH TO 128 CROPS WITH THE NAME>
+    python crop_images_gt.py --clemex_path <PATH_TO_CLEMEX_PREDICTIONS> --zones_path <PATH_TO_ZONES> --output_path <PATH_TO_OUTPUT_DIRECTORY> --mlography_path     
+    <PATH_TO_MLOGRAPHY_PREDICTIONS> --gt_path <PATH_TO_GROUND_TRUTH_IMAGES>
    ```
+3. **Process Non-overlapping Crops**:
+   Run the script crop_non_overlapping_crops.py to crop non-overlapping sections into 256x256 squares:
+   ```python
+   python non_overlapping_crops.py --image_dir <PATH TO IMAGE DIRECTORY> --output_dir <PATH TO OUTPUT DIRECTORY> --zone_size <WIDTH> <HEIGHT> --gt_image_dir <PATH TO GROUND TRUTH 
+   IMAGE DIRECTORY>
+   ```
+4.  **Calculate Grain Size**:
+    Run the script grain_size.py to calculate grain size:
+    ```python
+    python grain_size.py --gt_crops_path <PATH TO GT CROPS> --mlography_crops_path <PATH TO MLOGRAPHY CROPS> --clemex_crops_path <PATH TO CLEMEX CROPS> -- 
+    output_dir <PATH TO OUTPUT DIRECTORY>
+    ```
+5.  **Analyze Results**:
+    Run the script results.py to perform meta-statistical analysis and present the results:
+    ```python
+    python results.py --df_path <PATH TO CSV FILE CONTAINING RESULTS>
+    ```
+
+
+
+## Expected Output
+- **Cropped Images**: 256x256 cropped images saved in the specified output directory.
+- **Grain Size Calculation** : CSV file with calculated grain sizes.
+- **Statistical Analysis**: Printed statistics including mean, median, mode, standard deviation, variance, minimum, maximum, and sum of grain sizes for each model.
+
 
