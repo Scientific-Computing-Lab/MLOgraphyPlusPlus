@@ -235,7 +235,7 @@ def main(args):
     sub_model_folders = [
         (args.gt_crops_path, "GT"),
         ("/path/to/mlography_crops_256_no_gt", "MLOgraphy_256_Predictions"),
-        ("/path/to/mlography++_crops_256_no_gt", "MLOgraphy++_256_Predictions"),
+        ("/path/to/mlography_plus_crops_256_no_gt", "MLOgraphy++_256_Predictions"),
     ]
 
     output_base_dir = "/path/to/output_directory"
