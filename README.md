@@ -71,7 +71,7 @@ The data that was used in the paper is:
 - **Inference Data:**
   - Images: `/Datasets/MLOgraphy/Inference/without_impurities/`
   - Full Predictions: `/Datasets/MLOgraphy/Inference/mlography_full_predictions/`
-- **Evaluation Results - 256x256 crops with the Heyn intercept method::**
+- **Evaluation - 256x256 crops with the Heyn intercept method:**
    -  crops with no GT: `/Datasets/MLOgraphy++/Evaluation/squares_256_no_GT/`
   -   crops with ground truth: `/Datasets/MLOgraphy++/Evaluation/squares_256_with_GT/`
 
