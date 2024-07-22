@@ -66,9 +66,13 @@ There are several scripts:
 
 ## Data
 The data that was used in the paper is:
+
 **MLOgraphy**
--Inference Data:
- Images: /Datasets/MLOgraphy/Inference/without_impurities/
- Full Predictions: /Datasets/MLOgraphy/Inference/mlography_full_predictions/
+- **Inference Data:**
+  - Images: `/Datasets/MLOgraphy/Inference/without_impurities/`
+  - Full Predictions: `/Datasets/MLOgraphy/Inference/mlography_full_predictions/`
+- **Evaluation Results - 256x256 crops with the Heyn intercept method::**
+   -  crops with no GT: `/Datasets/MLOgraphy++/Evaluation/squares_256_no_GT/`
+  -   crops with ground truth: `/Datasets/MLOgraphy++/Evaluation/squares_256_with_GT/`
 
 
