@@ -64,4 +64,7 @@ There are several scripts:
 - **Grain Size Calculation** : CSV file with calculated grain sizes.
 - **Statistical Analysis**: Printed statistics including mean, median, mode, standard deviation, variance, minimum, maximum, and sum of grain sizes for each model.
 
+## Data
+The data that was used in the paper for:
+
 
