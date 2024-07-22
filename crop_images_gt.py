@@ -92,23 +92,23 @@ def process_img(input_dir, output_dir):
 
 def main():
     parser = argparse.ArgumentParser(description="Process and unify images for metallography.")
-    parser.add_argument('--clemex_path', type=str, required=True, help='Path to the clemex predictions directory.')
+    parser.add_argument('--mlography++_path', type=str, required=True, help='Path to the MLOgraphy++ predictions directory.')
     parser.add_argument('--zones_path', type=str, required=True, help='Path to crops with the zones in their filename.')
     parser.add_argument('--output_path', type=str, required=True, help='Path to the output directory.')
-    parser.add_argument('--mlography_path', type=str, required=True, help='Path to the metalography predictions directory.')
+    parser.add_argument('--mlography_path', type=str, required=True, help='Path to the MLOgraphy predictions directory.')
     
     args = parser.parse_args()
 
-    clemex_path = args.clemex_path
+    mlography++_path = args.mlography++_path
     zones_path = args.zones_path
     output_path = args.output_path
     mlography_path = args.mlography_path
 
-    clemex_128_out = os.path.join(output_path, 'clemex_predictions_squares_128')
-    clemex_256_path = os.path.join(output_path, 'clemex_unified_crops_256')
-    process_images(clemex_path, zones_path, clemex_128_out)
-    create_directory(clemex_256_path)
-    unify_crops(output_path, clemex_256_path)
+    mlography++_128_out = os.path.join(output_path, 'mlography++_predictions_squares_128')
+    cmlography++_256_path = os.path.join(output_path, 'mlography++_unified_crops_256')
+    process_images(mlography++_path, zones_path, mlography++_128_out)
+    create_directory(mlography++_256_path)
+    unify_crops(output_path, mlography++_256_path)
 
     
     mlography_128_out = os.path.join(output_path, 'mlography_predictions_squares_128')
@@ -121,7 +121,7 @@ def main():
     create_directory(gt_path)
     unify_crops(gt_path, gt_path)
     # Apply Guo-Hall thinning to the masks 
-    process_img(clemex_256_path, clemex_256_path)
+    process_img(mlography++_256_path, mlography++_256_path)
     process_img(gt_path, gt_path)
 
 if __name__ == "__main__":
