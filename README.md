@@ -9,6 +9,7 @@ We compare our approach against the previous state-of-the-art method MLOgraphy, 
 
 # Evaluation
 In this GitHub repository, we provide the evaluation code to reproduce our results. We convert GT annotations and models' predictions into 256x256 pixel images by combining 4 adjacent 128x128 labels for statistical analysis, averaging 10 times per image. We perform analysis both with and without overlapping sections with GT used during training to ensure comprehensive evaluation. We use Guo-Hall thinning and the Heyn intercept method to extract statistical results, including variance and mean of grain sizes, comparing MLOgraphy and MLOGRAPHY++.
+
    
 # Instructions
 
@@ -63,5 +64,7 @@ There are several scripts:
 - **Cropped Images**: 256x256 cropped images saved in the specified output directory.
 - **Grain Size Calculation** : CSV file with calculated grain sizes.
 - **Statistical Analysis**: Printed statistics including mean, median, mode, standard deviation, variance, minimum, maximum, and sum of grain sizes for each model.
+
+  
 
 
