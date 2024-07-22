@@ -30,7 +30,7 @@ There are several scripts:
 
 1. **Clone the Repository**:
    ```sh
-   git clone https://github.com/Inbalc2/GetGrainSize.git
+   git clone https://github.com/Inbalc2/MLOgraphy-.git
 
 2. **Crop the GT images**:
    Run the script `crop_images_gt.py`  to crop the ground truth images into 256x256 squares:
