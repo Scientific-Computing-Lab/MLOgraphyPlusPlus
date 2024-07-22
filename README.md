@@ -64,15 +64,4 @@ There are several scripts:
 - **Grain Size Calculation** : CSV file with calculated grain sizes.
 - **Statistical Analysis**: Printed statistics including mean, median, mode, standard deviation, variance, minimum, maximum, and sum of grain sizes for each model.
 
-## Data
-The data that was used in the paper is:
-
-**MLOgraphy**
-- **Inference Data:**
-  - Images: `/Datasets/MLOgraphy/Inference/without_impurities/`
-  - Full Predictions: `/Datasets/MLOgraphy/Inference/mlography_full_predictions/`
-- **Evaluation - 256x256 crops with the Heyn intercept method:**
-   -  crops with no GT: `/Datasets/MLOgraphy++/Evaluation/squares_256_no_GT/`
-  -   crops with ground truth: `/Datasets/MLOgraphy++/Evaluation/squares_256_with_GT/`
-
 
