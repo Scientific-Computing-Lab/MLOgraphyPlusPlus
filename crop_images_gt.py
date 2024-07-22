@@ -90,12 +90,12 @@ def process_img(input_dir, output_dir):
 
 def main():
     parser = argparse.ArgumentParser(description="Process and unify images for metallography.")
-    parser.add_argument('--mlography_plus_path', type=str, required=True, help='Path to the MLOgraphy++ predictions directory.')
-    parser.add_argument('--zones_path', type=str, required=True, help='Path to crops with the zones in their filename.')
+    parser.add_argument('--mlography_plus_path', type=str, required=True, help='Path to the MLOgraphy++ full predictions directory.')
+    parser.add_argument('--zones_path', type=str, required=True, help='Path to 128x128 predictions with zones in their filename.')
     parser.add_argument('--output_path', type=str, required=True, help='Path to the output directory.')
-    parser.add_argument('--mlography_path', type=str, required=True, help='Path to the MLOgraphy predictions directory.')
-    parser.add_argument('--gt_path', type=str, required=True, help='Path to the ground truth images directory.')
-    parser.add_argument('--gt_output_path', type=str, required=True, help='Path to the ground truth output directory.')
+    parser.add_argument('--mlography_path', type=str, required=True, help='Path to the MLOgraphy full predictions directory.')
+    parser.add_argument('--gt_path', type=str, required=True, help='Path to the 128x128 labels directory.')
+    parser.add_argument('--gt_output_path', type=str, required=True, help='Path to the 256x256 labels')
 
     args = parser.parse_args()
 
@@ -118,11 +118,9 @@ def main():
     create_directory(mlography_256_path)
     unify_crops(mlography_128_out, mlography_256_path)
 
-    # Handling ground truth path and crops
-    create_directory(gt_output_path)
+    create_directory(gt_output_path)  # Ensure the output directory is created
     unify_crops(gt_path, gt_output_path)
 
-    # Apply Guo-Hall thinning to the masks 
     process_img(mlography_plus_256_path, mlography_plus_256_path)
     process_img(gt_output_path, gt_output_path)
 
