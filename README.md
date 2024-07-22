@@ -9,8 +9,9 @@ We compare our approach against the previous state-of-the-art method MLOgraphy, 
 
 # Evaluation
 In this GitHub repository, we provide the evaluation code to reproduce our results. We convert GT annotations and models' predictions into 256x256 pixel images by combining 4 adjacent 128x128 labels for statistical analysis, averaging 10 times per image. We perform analysis both with and without overlapping sections with GT used during training to ensure comprehensive evaluation. We use Guo-Hall thinning and the Heyn intercept method to extract statistical results, including variance and mean of grain sizes, comparing MLOgraphy and MLOGRAPHY++.
+The evaluation process is demonstrated in the following figure:
 
-   
+ 
 # Instructions
 
 ## Installation Requirements
@@ -36,29 +37,27 @@ There are several scripts:
 2. **Crop the GT images**:
    Run the script `crop_images_gt.py`  to crop the ground truth images into 256x256 squares:
    ```python
-   python crop_images_gt.py --MLOGRAPHY++_path <PATH_TO_MLOGRAPHY++_PREDICTIONS> --zones_path <PATH_TO_ZONES> --output_path <PATH_TO_OUTPUT_DIRECTORY> --    
-   mlography_path <PATH_TO_MLOGRAPHY_PREDICTIONS> --gt_path <PATH_TO_GROUND_TRUTH_IMAGES>
+   python crop_images_gt.py --mlography_plus_path <PATH_TO_MLOGRAPHY++_PREDICTIONS> --zones_path <PATH_TO_ZONES> --output_path <PATH_TO_OUTPUT_DIRECTORY> -- 
+   mlography_path <PATH_TO_MLOGRAPHY_PREDICTIONS> --gt_path <PATH_TO_GROUND_TRUTH_COPS> --gt_output_path <PATH_TO_256x256_LABELS_OUTPUT_DIRECTORY>
    ```
 3. **Generate Non-overlapping Crops of Model Predictions:**:
    Run the script crop_non_overlapping_crops.py to crop non-overlapping sections of model predictions into 256x256 squares, ensuring they do not overlap with GT:
    ```python
-   python crop_non_overlapping_crops.py --image_dir <PATH_TO_IMAGE_DIRECTORY> --output_dir <PATH_TO_OUTPUT_DIRECTORY> --zone_size <WIDTH> <HEIGHT> --    
-   gt_image_dir <PATH_TO_GROUND_TRUTH_IMAGE_DIRECTORY>
+   python crop_non_overlapping_crops.py --image_dir <PATH_TO_IMAGEX_DIRECTORY> --output_dir <PATH_TO_OUTPUT_DIRECTORY> --zone_size <WIDTH> <HEIGHT> --    
+   gt_image_dir <PATH_TO_GROUND_TRUTH_IMAGES_DIRECTORY>
    IMAGE DIRECTORY>
    ```
 4.  **Calculate Grain Size Using the Heyn Intercept Method:**:
     Run the script grain_size.py for Heyn intercept method evaluation:
     ```python
-    python grain_size.py --gt_crops_path <PATH_TO_GT_CROPS> --mlography_crops_path <PATH_TO_MLOGRAPHY_CROPS> --MLOGRAPHY++_crops_path 
-    <PATH_TO_MLOGRAPHY++_CROPS> --output_dir <PATH_TO_OUTPUT_DIRECTORY>
-
+   python grain_size.py --gt_crops_path <PATH_TO_GT_CROPS> --mlography_crops_path <PATH_TO_MLOGRAPHY_CROPS> --mlography_plus_crops_path 
+   <PATH_TO_MLOGRAPHY++_CROPS> --output_dir <PATH_TO_OUTPUT_DIRECTORY>
     ```
 5.  **Analyze Results**:
     Run the script results.py to perform meta-statistical analysis and present the results:
     ```python
     python results.py --df_path <PATH TO CSV FILE CONTAINING RESULTS>
     ```
-
 
 ## Expected Output
 - **Cropped Images**: 256x256 cropped images saved in the specified output directory.
