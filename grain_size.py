@@ -6,6 +6,7 @@ import concurrent.futures
 from multiprocessing import cpu_count
 import argparse
 
+
 # Define constants    
 MARGIN = 2  # Margin for excluding borders when drawing horizontal lines
 

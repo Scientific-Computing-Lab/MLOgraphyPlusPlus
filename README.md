@@ -49,14 +49,17 @@ This project compares grain boundary detection using MLOgraphy and the enhanced 
   ## Data
   The data that was used in the paper is from [TBM Dataset](https://zenodo.org/records/8386997)
 
-  ## Results 
+  ## Results
+  The resulting csv file with the grain sizes of all models can be found in 
+
+
+  
 
   
   
 
  
 
-
-
  
  
+
