@@ -1,11 +1,12 @@
 
 
 ## Introduction
-This project compares grain boundary detection using MLOgraphy and the enhanced model, MLOgraphy++, on the TBM dataset. MLOgraphy trains a U-Net on 128x128 cropped sub-images with complete annotations but limited context. In contrast, MLOgraphy++ uses 256x256 partial annotations (combining four adjacent 128x128 labels) over the full image, capturing broader context for edge segmentation. We assessed performance using a variation of the Heyn intercept method, analyzing 256x256 image crops (with and without 50% overlap) via Guo-Hall thinning. The results show MLOgraphy++ closely aligns with the GT, similar to MLOgraphy, but more efficiently and without post-processing.
+This project compares grain boundary detection using MLOgraphy and the enhanced model, MLOgraphy++, on the TBM dataset. MLOgraphy trains a U-Net on 128x128 cropped sub-images with complete annotations but 
+limited context. In contrast, MLOgraphy++ uses 256x256 partial annotations (combining four adjacent 128x128 labels) over the full image, capturing broader context for edge segmentation. We assessed performance using a variation of the Heyn intercept method, analyzing 256x256 image crops (with and without 50% overlap) via Guo-Hall thinning. The results show MLOgraphy++ closely aligns with the GT, similar to MLOgraphy, but more efficiently and without post-processing.
 
 
 <div align="center">
-  <img src="results/MLOgraphy_Predictions/heyn_10-0-384.png" alt="Sample Image">
+  <img src="/Datasets/GT/Evaluation Crops (256x256)/heyn_10-0-768.png" alt="Sample Image">
 </div>
 
 
@@ -16,14 +17,14 @@ This project compares grain boundary detection using MLOgraphy and the enhanced 
 2. **Use the crops from all models** to compare their grain sizes(Ground Truth, MLOgraphy, and MLOgraphy++) using a variation of the Heyn intercept method.
 
 
-- **Scripts**:
+### Scripts
   - `unify_crops_GT.py`: Unifing 128x128 GT crops into 256x256 images .
   - `non_overlapping_crops.py`: Cropping non-overlapping 256x256 crops from MLOgraphy and MLOgraphy++ predictions. 
   - `overlapping_crops_GT.py`: Cropping overlapping 256x256 GT crops having 50% overlap.
   - `grain_size.py`: Functions for calculating grain size from images using a variation of the Heyn intercept method. It processes images, detects grain boundaries, calculates grain sizes, and optionally saves the processed images.
 
 
-## Usage Instructions
+### Usage Instructions
 1. ** Unify the GT crops**:
    Run the script `unify_crops_GT.py` in the following way:
    ```python
@@ -46,10 +47,10 @@ This project compares grain boundary detection using MLOgraphy and the enhanced 
    python grain_size.py --gt_path <PATH_TO_256X256_GT_CROPS> --mlography_path <PATH_TO_256X256_MLOGRAPHY_CROPS> --mlography_plus_plus_path <PATH_TO_256X256_MLOGRAPHY_PP_CROPS>
    ```
 
-  ## Data
-  The data that was used in the paper is from [TBM Dataset](https://zenodo.org/records/8386997)
+### Data
+  The data that was used in the paper is from the [TBM Dataset](https://zenodo.org/records/8386997).
 
-  ## Results
+### Results
   The resulting csv file with the grain sizes of all models can be found in 
 
 
