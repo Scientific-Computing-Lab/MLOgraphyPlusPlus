@@ -18,10 +18,10 @@ limited context. In contrast, MLOgraphy++ uses 256x256 partial annotations (comb
 
 
 ## Scripts
-  - `unify_crops_GT.py`: Unifing 128x128 GT crops into 256x256 images .
-  - `non_overlapping_crops.py`: Cropping non-overlapping 256x256 crops from MLOgraphy and MLOgraphy++ predictions. 
-  - `overlapping_crops_GT.py`: Cropping overlapping 256x256 GT crops having 50% overlap.
-  - `grain_size.py`: Functions for calculating grain size from images using a variation of the Heyn intercept method. It processes images, detects grain boundaries, calculates grain sizes, and optionally saves the processed images.
+  - **unify_crops_GT.py**: Unifing 128x128 GT crops into 256x256 images .
+  - **non_overlapping_crops.py**: Cropping non-overlapping 256x256 crops from MLOgraphy and MLOgraphy++ predictions. 
+  - **overlapping_crops_GT.py**: Cropping overlapping 256x256 GT crops having 50% overlap.
+  - **grain_size.py**: Functions for calculating grain size from images using a variation of the Heyn intercept method. It processes images, detects grain boundaries, calculates grain sizes, and optionally saves the processed images.
 
 
 ## Usage Instructions
@@ -34,13 +34,14 @@ limited context. In contrast, MLOgraphy++ uses 256x256 partial annotations (comb
 2. ** Cropping non-overlapping 256x256 crops **:
    Run the script `non_overlapping_crops.py` in the following way:
    ```python
-   python non_overlapping_crops.py --zone_size 256 256 --gt_image_dir <path to GT crops(128x128)> --image_dir1 <path to MLOgraphy++ full predictions> --output_dir1 <path to MLOgraphy++ non-overlapping crops(256x256) with GT> --image_dir2 <path to MLOgraphy full predictions> --output_dir2 <path to MLOgraphy non-overlapping crops(256x256) with GT>
+   python non_overlapping_crops.py --zone_size 256 256 --gt_image_dir <path to GT crops(128x128)> --image_dir1 <path to MLOgraphy++ full predictions> --output_dir1 <path to MLOgraphy++ non-overlapping 
+   crops(256x256) with GT> --image_dir2 <path to MLOgraphy full predictions> --output_dir2 <path to MLOgraphy non-overlapping crops(256x256) with GT>
    ```
 3. ** Cropping overlapping 256x256 GT crops having 50% overlap **:
-  Run the script `overlapping_crops_GT.py` in the following way:
-  ```python
-  python overlapping_crops_GT.py --gt_directory <path to GT crops(256x256)> --image_directory <path to GT annotations_overlayed_on_full_images> --output_directory <path to output overlapping crops of GT (256x256)>
-  ```
+   Run the script `overlapping_crops_GT.py` in the following way:
+   ```python
+   python overlapping_crops_GT.py --gt_directory <path to GT crops(256x256)> --image_directory <path to GT annotations_overlayed_on_full_images> --output_directory <path to output overlapping crops of GT (256x256)>
+   ```
 4. ** Calculating grain sizes **:
    Run the script `grain_size.py` in the following way:
    ```python
