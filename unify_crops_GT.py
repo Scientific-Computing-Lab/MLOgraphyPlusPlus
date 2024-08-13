@@ -31,28 +31,23 @@ def apply_guo_hall_thinning(image):
     thinned_image = cv2.bitwise_not(thinned_image)
     return thinned_image
 
-def convert_to_color(thinned_image, original_image):
-    # Ensure both images are in the correct format
-    thinned_image_rgb = cv2.cvtColor(thinned_image, cv2.COLOR_GRAY2RGB)
-    combined_image = np.where(thinned_image_rgb == 0, original_image, thinned_image_rgb)
-    return combined_image
-
 
 # Process each image in the input directory and save the thinned images
 def process_and_thin_images(input_dir, output_dir):
-    create_directory(output_dir)  # Ensure the output directory is created
+    # Ensure the output directory is created
+    os.makedirs(output_dir, exist_ok=True)
+    
     for image_name in os.listdir(input_dir):
-        if image_name.endswith(('.png', '.jpg', '.tif')):
+        if image_name.lower().endswith(('.png', '.jpg', '.tif')):
             input_path = os.path.join(input_dir, image_name)
             print(f"Processing image: {input_path}")
-            original_image = Image.open(input_path).convert('RGB')
-            grayscale_image = original_image.convert('L')  # Convert to grayscale
-
-            # Apply Guo-Hall thinning
+            
+            # Convert the image to grayscale and apply Guo-Hall thinning
+            grayscale_image = Image.open(input_path).convert('L')
             thinned_image = apply_guo_hall_thinning(grayscale_image)
-            original_image_np = np.array(original_image)
-            thinned_image_color = convert_to_color(thinned_image, original_image_np)
-            final_image = Image.fromarray(thinned_image_color.astype(np.uint8))
+            
+            # Save the thinned image
+            final_image = Image.fromarray(thinned_image)
             output_path = os.path.join(output_dir, image_name)
             final_image.save(output_path)
             print(f"Saved processed image: {output_path}")
