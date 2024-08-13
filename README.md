@@ -52,7 +52,7 @@ This project compares grain boundary detection using MLOgraphy and the enhanced 
   The specific data used for the evaluation can be found in the /Datasets/ directory.
 
 ## Results
-  The results, including the grain sizes measured for all models (Ground Truth, MLOgraphy, and MLOgraphy++), are saved in the Grain_sizes_results.csv file.
+  The results, including the grain sizes measured for all models (Ground Truth, MLOgraphy, and MLOgraphy++), are saved in the Results_grain_sizes.csv file.
 
 
   
