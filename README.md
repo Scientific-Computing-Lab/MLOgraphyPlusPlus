@@ -1,8 +1,7 @@
 
 
 # Introduction
-This project compares grain boundary detection using MLOgraphy and the enhanced model, MLOgraphy++, on the TBM dataset. MLOgraphy trains a U-Net on 128x128 cropped sub-images with complete annotations but 
-limited context. In contrast, MLOgraphy++ uses 256x256 partial annotations (combining four adjacent 128x128 labels) over the full image, capturing broader context for edge segmentation. We assessed performance using a variation of the Heyn intercept method, analyzing 256x256 image crops (with and without 50% overlap) via Guo-Hall thinning. The results show MLOgraphy++ closely aligns with the GT, similar to MLOgraphy, but more efficiently and without post-processing.
+This project compares grain boundary detection using MLOgraphy and the enhanced model, MLOgraphy++, on the TBM dataset. MLOgraphy trains a U-Net on 128x128 cropped sub-images with complete annotations but limited context. In contrast, MLOgraphy++ uses 256x256 partial annotations (combining four adjacent 128x128 labels) over the full image, capturing broader context for edge segmentation. We assessed performance using a variation of the Heyn intercept method, analyzing 256x256 image crops (with and without 50% overlap) via Guo-Hall thinning. The results show MLOgraphy++ closely aligns with the GT, similar to MLOgraphy, but more efficiently and without post-processing.
 
 
 <div align="center">
@@ -49,7 +48,7 @@ limited context. In contrast, MLOgraphy++ uses 256x256 partial annotations (comb
    ```
 
 ## Data
-  The data that was used in the paper is from the [TBM Dataset](https://zenodo.org/records/8386997).
+  The data that was used in the paper is from the [TBM Dataset](https://zenodo.org/records/8386997). 
   The specific data used for the evaluation can be found in the /Datasets/ directory.
 
 ## Results
