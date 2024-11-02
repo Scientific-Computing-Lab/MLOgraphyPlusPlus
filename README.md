@@ -9,7 +9,6 @@ This project compares grain boundary detection using MLOgraphy and the enhanced 
 </div>
 
 
-
 ## Key Steps
 1. **Unify human-tagged 128x128 GT crops into 256x256 images**, create additional 256x256 crops with 50% overlap.
 2.  **Crop non-overlapping 256x256 crops from MLOgraphy and MLOgraphy++ predictions**, with some sections having 50% overlap.
@@ -44,7 +43,7 @@ This project compares grain boundary detection using MLOgraphy and the enhanced 
 4. **Calculating grain sizes**:
    Run the script `grain_size.py` in the following way:
    ```python
-   python grain_size.py --gt_path <PATH_TO_256X256_GT_CROPS> --mlography_path <PATH_TO_256X256_MLOGRAPHY_CROPS> --mlography_plus_plus_path <PATH_TO_256X256_MLOGRAPHY_PP_CROPS>
+   python grain_size.py --gt_path <PATH_TO_256X256_GT_CROPS> --mlography_path <PATH_TO_256X256_MLOGRAPHY_CROPS> --mlography_plus_plus_path <PATH_TO_256X256_MLOGRAPHY_PLUS_PLUS_CROPS>
    ```
 
 ## Data
@@ -54,13 +53,38 @@ This project compares grain boundary detection using MLOgraphy and the enhanced 
 ## Results
   The results, including the grain sizes measured for all models (Ground Truth, MLOgraphy, and MLOgraphy++), are saved in the Results_grain_sizes.csv file.
 
-
-  
-
-  
-  
-
+# AutoSAM
+ This repository includes the fine-tuning of AutoSAM on the TBM dataset to improve the segmentation of complex grain boundaries, similar to the MLOgraphy method.  
  
+ This code is forked and highly based on [AutoSAM](https://github.com/talshaharabany/AutoSAM) repository by Tal Shaharabany.
+ 
+## SAM Checkpoints
+[SAM Base](https://drive.google.com/file/d/1ZwKc-7Q8ZaHfbGVKvvkz_LPBemxHyVpf/view) | [SAM Large](https://drive.google.com/file/d/16AhGjaVXrlheeXte8rvS2g2ZstWye3Xx/view) | [SAM Huge](https://drive.google.com/file/d/1tFYGukHxUCbCG3wPtuydO-lYakgpSYDd/view)
+ 
+## Usage Instructions
+1. **Set up the Environment for Running AutoSAM:**
+
+   Use the conda configuration file created by SAM environment setup, located at AutoSAM/sam.yaml.
+   Set up the environment by running the following command:
+   ```python
+   conda env create --name sam -f AutoSAM/sam.yaml
+   ```
+   Note: This enviorment will be used when running the training and inference scripts.
+3. **Activate the sam environment:**
+   ```python
+   conda activate sam
+   ```
+4. **Run the training script** to train the model on the TBM dataset:
+   ```python
+   python train.py --learning_rate 0.0003 --Batch_size 2 --epoches 100 --task tbm --train_data_root AutoSAM/TBM_dataset/TrainDataset --test_data_root AutoSAM/TBM_dataset/TestDataset --sam_checkpoint /path/to/sam_checkpoint.pth --model_type vit_h 
+    ```
+5. **Run the Inference Script** to perform inference using the fine-tuned model on the TBM dataset:
+   ```python
+   python inference.py --task tbm --folder <folder_name>  --train_data_root AutoSAM/TBM_dataset/TrainDataset --test_data_root AutoSAM/TBM_dataset/TestDataset --sam_checkpoint /path/to/sam_checkpoint.pth --model_type vit_h
+   ```
+   Note: The results comparing the Heyn intercept method applied on MLOgraphy++ and AutoSAM can be found in the research paper.
+
+
 
  
  
