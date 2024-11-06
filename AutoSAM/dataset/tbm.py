@@ -11,8 +11,10 @@ import cv2
 import sys
 import random
 import matplotlib.pyplot as plt
-from dataset.tfs import get_tbm_transform
 
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from dataset.tfs import get_tbm_transform
 def cv2_loader(path, is_mask):
     if is_mask:
         img = cv2.imread(path, 0) 

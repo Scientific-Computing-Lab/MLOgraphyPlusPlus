@@ -114,9 +114,9 @@ def get_tbm_transform():
     transform_train = transforms.Compose([
         transforms.ToPILImage(),
         transforms.ColorJitter(brightness=0.4,
-                                contrast=0.4,
-                                saturation=0.4,
-                                hue=0.1),
+                               contrast=0.4,
+                               saturation=0.4,
+                               hue=0.1),
         transforms.RandomVerticalFlip(),
         transforms.RandomHorizontalFlip(),
         transforms.RandomAffine(90, scale=(0.75, 1.25)),
@@ -129,3 +129,21 @@ def get_tbm_transform():
     return transform_train, transform_test
 
 
+def get_nbs2_transform():
+    transform_train = transforms.Compose([
+        transforms.ToPILImage(),
+        transforms.ColorJitter(brightness=0.4,
+                               contrast=0.4,
+                               saturation=0.4,
+                               hue=0.1),
+        transforms.RandomVerticalFlip(),
+        transforms.RandomHorizontalFlip(),
+        transforms.RandomRotation(degrees=(0, 180)),
+        transforms.RandomAffine(90, scale=(0.75, 1.25)),
+        transforms.ToTensor(),
+    ])
+    transform_test_val = transforms.Compose([
+        transforms.ToPILImage(),
+        transforms.ToTensor(),
+    ])
+    return transform_train, transform_test_val

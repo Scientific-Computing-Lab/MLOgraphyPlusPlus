@@ -13,7 +13,7 @@ from dataset.tbm import get_tbm_dataset
 from segment_anything import SamPredictor, sam_model_registry, SamAutomaticMaskGenerator
 from segment_anything.utils.transforms import ResizeLongestSide
 import torch.nn.functional as F
-
+ 
 
 def norm_batch(x):
     bs = x.shape[0]
@@ -185,9 +185,10 @@ def main(args=None, sam_args=None):
     elif args['task'] == 'polyp':
         trainset, testset = get_polyp_dataset(args, sam_trans=transform)
     elif args['task'] == 'tbm':
-        trainset, testset = get_tbm_dataset(args, sam_trans=transform) 
+         trainset, testset = get_tbm_dataset(args, sam_trans=transform)
     ds = torch.utils.data.DataLoader(trainset, batch_size=int(args['Batch_size']), shuffle=True,
                                      num_workers=int(args['nW']), drop_last=True)
+    
     ds_val = torch.utils.data.DataLoader(testset, batch_size=1, shuffle=False,
                                          num_workers=int(args['nW_eval']), drop_last=False)
     best = 0
@@ -210,7 +211,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Description of your program')
     parser.add_argument('-lr', '--learning_rate', default=0.0003, help='learning_rate', required=False)
     parser.add_argument('-bs', '--Batch_size', default=2, help='batch_size', required=False)
-    parser.add_argument('-epoches', '--epoches', default=100, help='number of epoches', required=False)
+    parser.add_argument('-epoches', '--epoches', default=256, help='number of epoches', required=False)
     parser.add_argument('-nW', '--nW', default=0, help='evaluation iteration', required=False)
     parser.add_argument('-nW_eval', '--nW_eval', default=0, help='evaluation iteration', required=False)
     parser.add_argument('-WD', '--WD', default=1e-4, help='evaluation iteration', required=False)
