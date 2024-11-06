@@ -9,14 +9,10 @@ import numpy as np
 import torchvision.datasets as tvdataset
 import cv2
 import sys
-import os
-import torch
 import random
 import matplotlib.pyplot as plt
-torch.cuda.empty_cache() 
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from dataset.tfs import get_tbm_transform
+
 def cv2_loader(path, is_mask):
     if is_mask:
         img = cv2.imread(path, 0) 
